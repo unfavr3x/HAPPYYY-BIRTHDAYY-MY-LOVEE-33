@@ -6,6 +6,7 @@
 <title>Happy Birthday Polu 💖</title>
 
 <style>
+/* ===== BODY ===== */
 body {
   margin: 0;
   height: 100vh;
@@ -19,12 +20,14 @@ body {
   text-align: center;
 }
 
+/* ===== CONTAINER ===== */
 .container {
   z-index: 2;
   padding: 20px;
   max-width: 350px;
 }
 
+/* ===== HEADER ===== */
 h1 {
   font-size: 2.4rem;
   margin-bottom: 5px;
@@ -41,7 +44,7 @@ h1 {
   to { text-shadow: 0 0 25px #fff, 0 0 40px #ff69b4; }
 }
 
-/* Slideshow */
+/* ===== SLIDESHOW PHOTOS ===== */
 .slideshow {
   width: 140px;
   height: 140px;
@@ -74,52 +77,58 @@ h1 {
   100% { opacity: 0; }
 }
 
-/* Cake */
-.cake {
-  margin: 20px auto;
-  width: 120px;
-  height: 90px;
-  background: #ff6f91;
-  border-radius: 10px;
+/* ===== ANIMATED CAKE ===== */
+.cake-container {
+  margin: 30px auto;
+  width: 200px;
   position: relative;
   cursor: pointer;
 }
 
-.cake::before {
-  content: "";
-  position: absolute;
-  top: -25px;
-  width: 120px;
-  height: 25px;
-  background: #ffc75f;
-  border-radius: 10px 10px 0 0;
+.cake-base {
+  width: 200px;
+  height: 100px;
+  background: #ff6f91;
+  border-radius: 15px;
+  position: relative;
 }
 
-.candle {
+.frosting {
   position: absolute;
-  top: -45px;
-  left: 55px;
-  width: 10px;
-  height: 25px;
-  background: white;
+  top: -20px;
+  width: 200px;
+  height: 20px;
+  background: #ffe066;
+  border-radius: 15px 15px 0 0;
+}
+
+.candles .candle {
+  position: absolute;
+  top: -40px;
+  width: 15px;
+  height: 40px;
+  background: #fff;
+  border-radius: 3px;
 }
 
 .flame {
   position: absolute;
   top: -15px;
   left: -5px;
-  width: 20px;
-  height: 20px;
+  width: 25px;
+  height: 25px;
   background: orange;
   border-radius: 50%;
-  animation: flicker 0.8s infinite alternate;
+  animation: flicker 0.7s infinite alternate;
 }
 
 @keyframes flicker {
-  from { transform: scale(1); }
-  to { transform: scale(1.2); }
+  0% { transform: scale(1); opacity:1; }
+  50% { transform: scale(1.3); opacity:0.8; }
+  100% { transform: scale(1); opacity:1; }
 }
 
+/* ===== TYPING MESSAGE ===== */
 #typing {
   font-size: 1.15rem;
   min-height: 120px;
@@ -133,21 +142,37 @@ h1 {
   color: #fff;
 }
 
-/* Floating emojis */
-.emoji {
+/* ===== FLOATING BALLOONS ===== */
+.balloon {
   position: absolute;
-  animation: float 6s linear infinite;
+  background: pink;
+  border-radius: 50%;
+  width: 30px;
+  height: 40px;
+  opacity: 0.9;
+  animation: rise 6s linear infinite;
 }
 
-@keyframes float {
-  from { transform: translateY(100vh); opacity: 1; }
-  to { transform: translateY(-10vh); opacity: 0; }
+.balloon::after {
+  content: "";
+  position: absolute;
+  width: 2px;
+  height: 10px;
+  background: #d47;
+  left: 50%;
+  bottom: -10px;
 }
 
-/* Responsive adjustments */
+@keyframes rise {
+  0% { transform: translateY(100vh); opacity: 1; }
+  100% { transform: translateY(-20vh); opacity: 0; }
+}
+
+/* ===== RESPONSIVE ===== */
 @media (max-width: 500px) {
   .slideshow { width: 120px; height: 120px; }
-  .cake { width: 100px; height: 75px; }
+  .cake-container { width: 150px; }
+  .cake-base { height: 80px; }
   h1 { font-size: 2rem; }
   #typing { font-size: 1rem; }
 }
@@ -166,9 +191,15 @@ h1 {
     <img src="photo3.jpg">
   </div>
 
-  <div class="cake" onclick="blowCandle()">
-    <div class="candle">
-      <div class="flame" id="flame"></div>
+  <!-- Animated Cake -->
+  <div class="cake-container" onclick="blowCandle()">
+    <div class="cake-base">
+      <div class="frosting"></div>
+      <div class="candles">
+        <div class="candle"><div class="flame" id="flame1"></div></div>
+        <div class="candle" style="left: 50px;"><div class="flame" id="flame2"></div></div>
+        <div class="candle" style="left: 100px;"><div class="flame" id="flame3"></div></div>
+      </div>
     </div>
   </div>
 
@@ -176,7 +207,7 @@ h1 {
   <div id="finalLine">I choose you. In every life. Forever. 🌙💍</div>
 </div>
 
-<!-- YouTube embed for Stargirl Interlude -->
+<!-- YouTube Music Embed (Stargirl Interlude) -->
 <div style="display:none;">
 <iframe
   id="musicIframe"
@@ -188,7 +219,7 @@ h1 {
 </div>
 
 <script>
-// MESSAGE (typed)
+// ===== TYPING MESSAGE =====
 const message = `Happyyy Birthday my loveee 💖🎉
 My Polu… my shona, my bacha, my life, my everything.
 You are my home, my peace, my noor-e-jahan ✨
@@ -208,23 +239,24 @@ function typeText() {
 }
 typeText();
 
-// Blow candle
+// ===== BLOW CANDLES =====
 function blowCandle() {
-  document.getElementById("flame").style.display = "none";
+  document.getElementById("flame1").style.display = "none";
+  document.getElementById("flame2").style.display = "none";
+  document.getElementById("flame3").style.display = "none";
   document.getElementById("finalLine").style.display = "block";
 }
 
-// Floating emojis
-const emojis = ["💖","💕","💞","🥰","😘","🦋","✨"];
+// ===== FLOATING BALLOONS =====
 setInterval(() => {
-  const e = document.createElement("div");
-  e.className = "emoji";
-  e.innerText = emojis[Math.floor(Math.random()*emojis.length)];
-  e.style.left = Math.random()*100 + "vw";
-  e.style.fontSize = "24px";
-  document.body.appendChild(e);
-  setTimeout(()=>e.remove(),6000);
-}, 300);
+  const b = document.createElement("div");
+  b.className = "balloon";
+  b.style.left = Math.random()*100 + "vw";
+  b.style.width = 20+Math.random()*20 + "px";
+  b.style.height = 30+Math.random()*20 + "px";
+  document.body.appendChild(b);
+  setTimeout(()=>b.remove(),6000);
+}, 400);
 </script>
 
 </body>
