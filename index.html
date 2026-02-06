@@ -3,84 +3,216 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Happy Birthday 🎂</title>
+<title>Happy Birthday Polu 💖</title>
+
 <style>
-  body {
-    margin: 0;
-    padding: 0;
-    background: linear-gradient(135deg, #ff9a9e, #fad0c4);
-    font-family: 'Arial', sans-serif;
-    overflow: hidden;
-    text-align: center;
-    color: #fff;
-  }
-  #container {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-  }
-  h1 {
-    font-size: 3rem;
-    margin: 0.5rem;
-    animation: glow 1.5s ease-in-out infinite alternate;
-  }
-  @keyframes glow {
-    from { text-shadow: 0 0 10px #fff, 0 0 20px #f0a, 0 0 30px #f0a; }
-    to   { text-shadow: 0 0 20px #fff, 0 0 30px #f0a, 0 0 40px #f0a; }
-  }
-  #sub {
-    font-size: 1.5rem;
-    margin-top: 0.5rem;
-  }
-  .confetti {
-    position: absolute;
-    width: 10px;
-    height: 10px;
-    background: white;
-    opacity: 0.8;
-    animation: fall 5s infinite;
-  }
-  @keyframes fall {
-    to { transform: translateY(700px) rotate(360deg); opacity: 0; }
-  }
-</style>
-</head>
-<body>
-
-<div id="container">
-  <h1>Happy Birthday ❤️</h1>
-  <div id="sub">To my love — I’m always with you ✨</div>
-</div>
-
-<audio id="music" src="https://cdn.pixabay.com/download/audio/2021/12/08/audio_0f2096ee9a.mp3?filename=happy-birthday-10883.mp3"></audio>
-
-<script>
-// play music
-const music = document.getElementById("music");
-music.volume = 0.8;
-
-// wait for user click (required on phones)
-document.body.addEventListener('click', () => {
-  music.play();
-});
-
-// make confetti
-function confettiPiece() {
-  const div = document.createElement("div");
-  div.className = "confetti";
-  document.body.appendChild(div);
-
-  div.style.left = Math.random() * window.innerWidth + "px";
-  div.style.background = `hsl(${Math.random() * 360}, 100%, 75%)`;
-  div.style.animationDuration = 3 + Math.random() * 3 + "s";
-
-  setTimeout(() => { div.remove(); }, 6000);
+body {
+  margin: 0;
+  height: 100vh;
+  background: linear-gradient(135deg, #ff9a9e, #fad0c4);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: 'Segoe UI', sans-serif;
+  overflow: hidden;
+  color: white;
+  text-align: center;
 }
 
-// spawn confetti
-setInterval(confettiPiece, 200);
+.container {
+  z-index: 2;
+  padding: 20px;
+  max-width: 350px;
+}
 
+h1 {
+  font-size: 2.6rem;
+  margin-bottom: 5px;
+}
+
+#sparkleName {
+  font-size: 2.2rem;
+  margin-bottom: 15px;
+  animation: sparkle 2s infinite alternate;
+}
+
+@keyframes sparkle {
+  from { text-shadow: 0 0 10px #fff; }
+  to { text-shadow: 0 0 25px #fff, 0 0 40px #ff69b4; }
+}
+
+/* Slideshow */
+.slideshow {
+  width: 160px;
+  height: 160px;
+  border-radius: 50%;
+  overflow: hidden;
+  margin: 0 auto 15px;
+  border: 4px solid white;
+  box-shadow: 0 0 25px rgba(255,255,255,0.8);
+}
+
+.slideshow img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  position: absolute;
+  opacity: 0;
+  animation: slide 12s infinite;
+}
+
+.slideshow img:nth-child(1) { animation-delay: 0s; }
+.slideshow img:nth-child(2) { animation-delay: 4s; }
+.slideshow img:nth-child(3) { animation-delay: 8s; }
+
+@keyframes slide {
+  0% { opacity: 0; }
+  10% { opacity: 1; }
+  30% { opacity: 1; }
+  40% { opacity: 0; }
+  100% { opacity: 0; }
+}
+
+/* Cake */
+.cake {
+  margin: 20px auto;
+  width: 120px;
+  height: 90px;
+  background: #ff6f91;
+  border-radius: 10px;
+  position: relative;
+  cursor: pointer;
+}
+
+.cake::before {
+  content: "";
+  position: absolute;
+  top: -25px;
+  width: 120px;
+  height: 25px;
+  background: #ffc75f;
+  border-radius: 10px 10px 0 0;
+}
+
+.candle {
+  position: absolute;
+  top: -45px;
+  left: 55px;
+  width: 10px;
+  height: 25px;
+  background: white;
+}
+
+.flame {
+  position: absolute;
+  top: -15px;
+  left: -5px;
+  width: 20px;
+  height: 20px;
+  background: orange;
+  border-radius: 50%;
+  animation: flicker 0.8s infinite alternate;
+}
+
+@keyframes flicker {
+  from { transform: scale(1); }
+  to { transform: scale(1.2); }
+}
+
+#typing {
+  font-size: 1.15rem;
+  min-height: 120px;
+}
+
+#finalLine {
+  display: none;
+  font-size: 1.4rem;
+  margin-top: 15px;
+  color: #fff;
+}
+
+/* Floating emojis */
+.emoji {
+  position: absolute;
+  animation: float 6s linear infinite;
+}
+
+@keyframes float {
+  from { transform: translateY(100vh); opacity: 1; }
+  to { transform: translateY(-10vh); opacity: 0; }
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+  <h1>Happyyy Birthday 🎂💖</h1>
+  <div id="sparkleName">Disha 💕 (my Polu)</div>
+
+  <div class="slideshow">
+    <img src="photo1.jpg">
+    <img src="photo2.jpg">
+    <img src="photo3.jpg">
+  </div>
+
+  <div class="cake" onclick="blowCandle()">
+    <div class="candle">
+      <div class="flame" id="flame"></div>
+    </div>
+  </div>
+
+  <div id="typing"></div>
+  <div id="finalLine">I choose you. In every life. Forever. 🌙💍</div>
+</div>
+
+<audio id="music" loop>
+  <source src="https://cdn.pixabay.com/download/audio/2021/12/08/audio_0f2096ee9a.mp3">
+</audio>
+
+<script>
+// MESSAGE (typed)
+const message = `Happyyy Birthday my loveee 💖🎉
+My Polu… my shona, my bacha, my life, my everything.
+You are my home, my peace, my noor-e-jahan ✨
+Your beauty is so adorable, inside and out, it melts my heart every single day.
+I feel blessed beyond words to have you in my life.
+Your role in my life is irreplaceable, inevitable, eternal.
+I want to spend my whole life loving you, choosing you, fighting for you.
+I’ll do everything, absolutely everything, to make you mine forever. 🌙❤️`;
+
+let i = 0;
+function typeText() {
+  if (i < message.length) {
+    document.getElementById("typing").innerHTML += message.charAt(i);
+    i++;
+    setTimeout(typeText, 45);
+  }
+}
+typeText();
+
+// Blow candle
+function blowCandle() {
+  document.getElementById("flame").style.display = "none";
+  document.getElementById("finalLine").style.display = "block";
+}
+
+// Floating emojis
+const emojis = ["💖","💕","💞","🥰","😘","🦋","✨"];
+setInterval(() => {
+  const e = document.createElement("div");
+  e.className = "emoji";
+  e.innerText = emojis[Math.floor(Math.random()*emojis.length)];
+  e.style.left = Math.random()*100 + "vw";
+  e.style.fontSize = "24px";
+  document.body.appendChild(e);
+  setTimeout(()=>e.remove(),6000);
+}, 300);
+
+// Music
+document.body.addEventListener("click", () => {
+  document.getElementById("music").play();
+},{ once:true });
 </script>
 
 </body>
